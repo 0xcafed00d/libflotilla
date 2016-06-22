@@ -1,5 +1,5 @@
-#ifndef ARDUINO_FLOTILLA_DUMMY_MODULE_H
-#define ARDUINO_FLOTILLA_DUMMY_MODULE_H
+#ifndef ARDUINO_FLOTILLA_MODULE_H
+#define ARDUINO_FLOTILLA_MODULE_H
 
 #include "Arduino.h"
 
@@ -19,7 +19,13 @@ class Module {
 
 	virtual const char* Name() = 0;
 
-	virtual void OnEnquire(Stream* stream) = 0;
+	void OnEnquire(Stream* stream) {
+		stream->print("c ");
+		stream->print(Channel());
+		stream->print("/");
+		stream->print(Name());
+		stream->print("\r\n");
+	}
 
 	virtual void Set(int* params, int paramc) {
 	}
@@ -28,4 +34,4 @@ class Module {
 	}
 };
 
-#endif  // ARDUINO_FLOTILLA_DUMMY_MODULE_H
+#endif

@@ -1,5 +1,5 @@
-#ifndef ARDUINO_FLOTILLA_DUMMY_DOCK_H
-#define ARDUINO_FLOTILLA_DUMMY_DOCK_H
+#ifndef ARDUINO_FLOTILLA_DOCK_H
+#define ARDUINO_FLOTILLA_DOCK_H
 
 #include "Arduino.h"
 #include "module.h"

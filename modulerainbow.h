@@ -1,12 +1,11 @@
-#ifndef ARDUINO_FLOTILLA_DUMMY_MODULERAINBOW_H
-#define ARDUINO_FLOTILLA_DUMMY_MODULERAINBOW_H
+#ifndef ARDUINO_FLOTILLA_MODULERAINBOW_H
+#define ARDUINO_FLOTILLA_MODULERAINBOW_H
 
 #include "module.h"
-#include "led.h"
 
 class ModuleRainbow : public Module {
-  private:
-	LED m_leds[5];
+  protected:
+	virtual void SetLED(int index, uint8_t r, uint8_t g, uint8_t b) = 0;
 
   public:
 	void Init(int chan);
@@ -16,8 +15,6 @@ class ModuleRainbow : public Module {
 	}
 
 	virtual void Set(int* params, int paramc);
-
-	virtual void OnEnquire(Stream* stream);
 };
 
-#endif  // ARDUINO_FLOTILLA_DUMMY_MODULERAINBOW_H
+#endif
