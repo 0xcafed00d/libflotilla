@@ -4,5 +4,7 @@
 #include "dock.h"
 #include "modulerainbow.h"
 #include "moduletouch.h"
+#include "modulelight.h"
+#include "moduleweather.h"
 
 #endif
