@@ -6,5 +6,6 @@
 #include "moduletouch.h"
 #include "modulelight.h"
 #include "moduleweather.h"
+#include "modulemotion.h"
 
 #endif
