@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "module.h"
+#include "timeout.h"
 
 struct Vector {
 	int16_t x, y, z;
@@ -20,6 +21,7 @@ class ModuleMotion : public Module {
   private:
 	Vector m_prevAccel;
 	Vector m_prevMag;
+	TimeOut m_timeout;
 
   protected:
 	virtual void GetState(Vector& accel, Vector& mag) = 0;

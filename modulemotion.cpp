@@ -18,7 +18,7 @@ void ModuleMotion::Update(Stream* stream) {
 	Vector accel, mag;
 	GetState(accel, mag);
 
-	if (accel != m_prevAccel || mag != m_prevMag) {
+	if (m_timeout.hasTimedOut() && (accel != m_prevAccel || mag != m_prevMag)) {
 		stream->print("u ");
 		stream->print(Channel());
 		stream->print("/");
@@ -31,5 +31,6 @@ void ModuleMotion::Update(Stream* stream) {
 
 		m_prevAccel = accel;
 		m_prevMag = mag;
+		m_timeout = TimeOut(100);
 	}
 }
