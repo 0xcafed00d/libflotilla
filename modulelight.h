@@ -4,12 +4,16 @@
 #include <Arduino.h>
 #include "module.h"
 #include "timeout.h"
+#include "averagevalue.h"
 
 class ModuleLight : public Module {
   private:
 	uint16_t m_prevVisible;
 	uint16_t m_prevIR;
 	uint16_t m_prevLux;
+	AverageValue<uint32_t, uint16_t> m_visible;
+	AverageValue<uint32_t, uint16_t> m_IR;
+	AverageValue<uint32_t, uint16_t> m_lux;
 	TimeOut m_timeout;
 
   protected:
