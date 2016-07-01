@@ -6,8 +6,8 @@
 template <typename total_t, typename value_t>
 class AverageValue {
   private:
-	total_t m_total;
 	value_t m_count;
+	total_t m_total;
 
   public:
 	AverageValue() : m_count(0), m_total(0) {

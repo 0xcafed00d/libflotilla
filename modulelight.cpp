@@ -18,11 +18,7 @@ void ModuleLight::Update(Stream* stream) {
 		lux = m_lux.value();
 
 		if (vis != m_prevVisible || ir != m_prevIR || lux != m_prevLux) {
-			stream->print("u ");
-			stream->print(Channel());
-			stream->print("/");
-			stream->print(Name());
-			stream->print(" ");
+			printUpdateHeader(stream);
 			stream->print(vis);
 			stream->print(", ");
 			stream->print(ir);

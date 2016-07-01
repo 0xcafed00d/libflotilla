@@ -4,9 +4,11 @@
 #include <Arduino.h>
 #include "module.h"
 #include "timeout.h"
+#include "averagevalue.h"
 
+template <typename value_t>
 struct Vector {
-	int16_t x, y, z;
+	value_t x, y, z;
 
 	bool operator==(Vector& that) {
 		return x == that.x && y == that.y && z == that.z;
@@ -19,12 +21,14 @@ struct Vector {
 
 class ModuleMotion : public Module {
   private:
-	Vector m_prevAccel;
-	Vector m_prevMag;
+	Vector<int16_t> m_prevAccel;
+	Vector<int16_t> m_prevMag;
+	Vector<AverageValue<int32_t, int16_t>> m_accel;
+	Vector<AverageValue<int32_t, int16_t>> m_mag;
 	TimeOut m_timeout;
 
   protected:
-	virtual void GetState(Vector& accel, Vector& mag) = 0;
+	virtual void GetState(Vector<int16_t>& accel, Vector<int16_t>& mag) = 0;
 
   public:
 	void Init(int chan);

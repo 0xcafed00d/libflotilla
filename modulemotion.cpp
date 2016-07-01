@@ -2,11 +2,11 @@
 
 void ModuleMotion::Init(int chan) {
 	SetChannel(chan);
-	m_prevAccel = Vector{};
-	m_prevMag = Vector{};
+	m_prevAccel = Vector<int16_t>{};
+	m_prevMag = Vector<int16_t>{};
 }
 
-void printVector(Stream* stream, const Vector& v) {
+void printVector(Stream* stream, const Vector<int16_t>& v) {
 	stream->print(v.x);
 	stream->print(", ");
 	stream->print(v.y);
@@ -15,22 +15,31 @@ void printVector(Stream* stream, const Vector& v) {
 }
 
 void ModuleMotion::Update(Stream* stream) {
-	Vector accel, mag;
+	Vector<int16_t> accel, mag;
 	GetState(accel, mag);
 
-	if (m_timeout.hasTimedOut() && (accel != m_prevAccel || mag != m_prevMag)) {
-		stream->print("u ");
-		stream->print(Channel());
-		stream->print("/");
-		stream->print(Name());
-		stream->print(" ");
-		printVector(stream, accel);
-		stream->print(", ");
-		printVector(stream, mag);
-		stream->print("\r\n");
+	m_accel.x.addValue(accel.x);
+	m_accel.y.addValue(accel.y);
+	m_accel.y.addValue(accel.y);
 
-		m_prevAccel = accel;
-		m_prevMag = mag;
-		m_timeout = TimeOut(100);
+	if (m_timeout.hasTimedOut()) {
+		accel.x = m_accel.x.value();
+		accel.y = m_accel.y.value();
+		accel.z = m_accel.z.value();
+
+		if (accel != m_prevAccel || mag != m_prevMag) {
+			printUpdateHeader(stream);
+			printVector(stream, accel);
+			stream->print(", ");
+			printVector(stream, mag);
+			stream->print("\r\n");
+
+			m_prevAccel = accel;
+			m_prevMag = mag;
+			m_timeout = TimeOut(100);
+		}
+		m_accel.x.reset();
+		m_accel.y.reset();
+		m_accel.z.reset();
 	}
 }

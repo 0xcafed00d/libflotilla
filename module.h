@@ -12,6 +12,14 @@ class Module {
 		m_channel = c;
 	}
 
+	void printUpdateHeader(Stream* stream) {
+		stream->print("u ");
+		stream->print(Channel());
+		stream->print("/");
+		stream->print(Name());
+		stream->print(" ");
+	}
+
   public:
 	int Channel() {
 		return m_channel;

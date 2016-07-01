@@ -10,11 +10,8 @@ void ModuleTouch::Update(Stream* stream) {
 
 	if (newState != m_prevState) {
 		m_prevState = newState;
-		stream->print("u ");
-		stream->print(Channel());
-		stream->print("/");
-		stream->print(Name());
-		stream->print((m_prevState & 1) ? " 1," : " 0,");
+		printUpdateHeader(stream);
+		stream->print((m_prevState & 1) ? "1," : "0,");
 		stream->print((m_prevState & 2) ? "1," : "0,");
 		stream->print((m_prevState & 4) ? "1," : "0,");
 		stream->print((m_prevState & 8) ? "1\r\n" : "0\r\n");
