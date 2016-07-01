@@ -20,7 +20,7 @@ void ModuleMotion::Update(Stream* stream) {
 
 	m_accel.x.addValue(accel.x);
 	m_accel.y.addValue(accel.y);
-	m_accel.y.addValue(accel.y);
+	m_accel.z.addValue(accel.z);
 
 	if (m_timeout.hasTimedOut()) {
 		accel.x = m_accel.x.value();
