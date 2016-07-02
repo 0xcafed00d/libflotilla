@@ -1,5 +1,5 @@
 #include "dock.h"
-#include "eeprom.h"
+#include "eepromutils.h"
 
 bool isDelim(char c) {
 	return c == ',' || c == ' ';
@@ -57,19 +57,22 @@ struct flotillaName {
 };
 
 void writeName(const char* name, size_t index) {
+	flotillaName fname;
+	memset(&fname, 0, sizeof(fname));
+	strncpy(fname.name, name, 8);
+	fname.check = checksum(&fname);
+	writeStructEEPROM(fname, sizeof(fname) * index);
 }
 
 void readName(char* name, size_t index) {
 }
 
 void Dock::handleName(char** params, Stream* stream) {
-	if (pcount == 2) {
-		if (*params[0] == 'u') {
-			writeName(params[1], 0);
-		}
-		if (*params[0] == 'd') {
-			writeName(params[1], 1);
-		}
+	if (*params[0] == 'u') {
+		writeName(params[1], 0);
+	}
+	if (*params[0] == 'd') {
+		writeName(params[1], 1);
 	}
 }
 
