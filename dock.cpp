@@ -1,4 +1,5 @@
 #include "dock.h"
+#include "eeprom.h"
 
 bool isDelim(char c) {
 	return c == ',' || c == ' ';
@@ -43,6 +44,31 @@ void Dock::handleCommand(char** cmd, Stream* stream) {
 			case 's':
 				handleSet(cmd + 1, stream);
 				break;
+			case 'n':
+				handleName(cmd + 1, stream);
+				break;
+		}
+	}
+}
+
+struct flotillaName {
+	char name[9];
+	uint8_t check;
+};
+
+void writeName(const char* name, size_t index) {
+}
+
+void readName(char* name, size_t index) {
+}
+
+void Dock::handleName(char** params, Stream* stream) {
+	if (pcount == 2) {
+		if (*params[0] == 'u') {
+			writeName(params[1], 0);
+		}
+		if (*params[0] == 'd') {
+			writeName(params[1], 1);
 		}
 	}
 }

@@ -28,6 +28,7 @@ class Dock {
 	void handleDebug(Stream* stream);
 	void handleEnquire(Stream* stream);
 	void handleSet(char** params, Stream* stream);
+	void handleName(char** params, Stream* stream);
 
   public:
 	Dock();
