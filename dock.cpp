@@ -65,14 +65,26 @@ void writeName(const char* name, size_t index) {
 }
 
 void readName(char* name, size_t index) {
+	flotillaName fname;
+	readStructEEPROM(fname, sizeof(fname) * index);
+	uint8_t chk = fname.check;
+	fname.check = 0;
+
+	if (chk == checksum(&fname)) {
+		strcpy(name, fname.name);
+	} else {
+		strcpy(name, "Unnamed");
+	}
 }
 
 void Dock::handleName(char** params, Stream* stream) {
-	if (*params[0] == 'u') {
-		writeName(params[1], 0);
-	}
-	if (*params[0] == 'd') {
-		writeName(params[1], 1);
+	if (*params) {
+		if (*params[0] == 'u') {
+			writeName(params[1], 0);
+		}
+		if (*params[0] == 'd') {
+			writeName(params[1], 1);
+		}
 	}
 }
 
@@ -96,11 +108,19 @@ void Dock::parseBuffer() {
 }
 
 void Dock::handleVersion(Stream* stream) {
+	char name[9];
 	stream->print("# Flotilla ready to set sail..\r\n");
 	stream->print("# Version: 1.12\r\n");
 	stream->print("# Serial: 0111111111111111111111\r\n");
-	stream->print("# User: Unnamed\r\n");
-	stream->print("# Dock: Unnamed\r\n");
+
+	readName(name, 0);
+	stream->print("# User: ");
+	stream->print(name);
+
+	readName(name, 1);
+	stream->print("\r\n# Dock: ");
+	stream->print(name);
+	stream->print("\r\n");
 }
 
 void Dock::handleDebug(Stream* stream) {

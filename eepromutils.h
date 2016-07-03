@@ -15,21 +15,13 @@ uint8_t checksum(type* data) {
 
 template <typename type>
 int writeStructEEPROM(const type& s, int addr) {
-	for (int n = 0; n < sizeof(type); n++) {
-		int8_t val = ((int8_t*)&s)[n];
-		eeprom_write_byte(addr + n, val);
-		if (val != eeprom_read_byte(addr + n)) {
-			return -1;
-		}
-	}
+	eeprom_write_block(&s, (void*)addr, sizeof(type));
 	return sizeof(type);
 }
 
 template <typename type>
 int readStructEEPROM(type& s, int addr) {
-	for (int n = 0; n < sizeof(type); n++) {
-		((int8_t*)&s)[n] = eeprom_read_byte(addr + n);
-	}
+	eeprom_read_block(&s, (void*)addr, sizeof(type));
 	return sizeof(type);
 }
 
