@@ -23,7 +23,7 @@ void Dock::handleSet(char** params, Stream* stream) {
 	int pcount = convertParams(params, intParams);
 	if (pcount > 1) {
 		Module* m = m_channels[intParams[0] - 1];
-		if (m) {
+		if (m && m->IsConnected()) {
 			m->Set(intParams + 1, pcount - 1);
 		}
 	}
@@ -193,7 +193,7 @@ void Dock::ProcessInput(Stream* stream) {
 
 void Dock::Update(Stream* stream) {
 	for (size_t n = 0; n < NUM_MODULES; n++) {
-		if (m_channels[n] != NULL) {
+		if (m_channels[n] != NULL && m_channels[n]->IsConnected()) {
 			m_channels[n]->Update(stream);
 		}
 	}

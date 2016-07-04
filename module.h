@@ -6,8 +6,12 @@
 class Module {
   private:
 	int m_channel;
+	bool m_connected;
 
   protected:
+	Module() : m_connected(true) {
+	}
+
 	void SetChannel(int c) {
 		m_channel = c;
 	}
@@ -23,6 +27,14 @@ class Module {
   public:
 	int Channel() {
 		return m_channel;
+	}
+
+	bool IsConnected() {
+		return m_connected;
+	}
+
+	void SetConnected(bool c) {
+		m_connected = c;
 	}
 
 	virtual const char* Name() = 0;
