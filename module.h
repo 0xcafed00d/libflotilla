@@ -9,49 +9,18 @@ class Module {
 	bool m_connected;
 
   protected:
-	Module() : m_connected(true) {
-	}
-
-	void SetChannel(int c) {
-		m_channel = c;
-	}
-
-	void printUpdateHeader(Stream* stream) {
-		stream->print("u ");
-		stream->print(Channel());
-		stream->print("/");
-		stream->print(Name());
-		stream->print(" ");
-	}
+	Module();
+	void SetChannel(int c);
+	void printUpdateHeader(Stream* stream);
 
   public:
-	int Channel() {
-		return m_channel;
-	}
-
-	bool IsConnected() {
-		return m_connected;
-	}
-
-	void SetConnected(bool c) {
-		m_connected = c;
-	}
-
+	int Channel();
+	bool IsConnected();
+	void SetConnected(bool c);
 	virtual const char* Name() = 0;
-
-	void OnEnquire(Stream* stream) {
-		stream->print("c ");
-		stream->print(Channel());
-		stream->print("/");
-		stream->print(Name());
-		stream->print("\r\n");
-	}
-
-	virtual void Set(int* params, int paramc) {
-	}
-
-	virtual void Update(Stream* stream) {
-	}
+	void OnEnquire(Stream* stream);
+	virtual void Set(int* params, int paramc);
+	virtual void Update(Stream* stream);
 };
 
 #endif
