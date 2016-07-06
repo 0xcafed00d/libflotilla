@@ -7,5 +7,6 @@
 #include "modulelight.h"
 #include "moduleweather.h"
 #include "modulemotion.h"
+#include "modulemotor.h"
 
 #endif
