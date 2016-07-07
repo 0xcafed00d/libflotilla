@@ -5,7 +5,7 @@ bool isDelim(char c) {
 	return c == ',' || c == ' ';
 }
 
-Dock::Dock() : m_bufferPos(0), m_fpsTimer(1000), m_fpsCounter(0), m_fps(0) {
+Dock::Dock() : m_bufferPos(0), m_fpsTimer(1000), m_fpsCounter(0), m_fps(0), m_updateTimer(50) {
 	memset(m_channels, 0, sizeof(m_channels));
 }
 
@@ -192,9 +192,12 @@ void Dock::ProcessInput(Stream* stream) {
 }
 
 void Dock::Update(Stream* stream) {
-	for (size_t n = 0; n < NUM_MODULES; n++) {
-		if (m_channels[n] != NULL && m_channels[n]->IsConnected()) {
-			m_channels[n]->Update(stream);
+	if (m_updateTimer.hasTimedOut()) {
+		for (size_t n = 0; n < NUM_MODULES; n++) {
+			if (m_channels[n] != NULL && m_channels[n]->IsConnected()) {
+				m_channels[n]->Update(stream);
+			}
 		}
+		m_updateTimer = TimeOut(50);
 	}
 }

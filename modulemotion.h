@@ -3,8 +3,6 @@
 
 #include <Arduino.h>
 #include "module.h"
-#include "timeout.h"
-#include "averagevalue.h"
 
 template <typename value_t>
 struct Vector {
@@ -23,9 +21,6 @@ class ModuleMotion : public Module {
   private:
 	Vector<int16_t> m_prevAccel;
 	Vector<int16_t> m_prevMag;
-	Vector<AverageValue<int32_t, int16_t>> m_accel;
-	Vector<AverageValue<int32_t, int16_t>> m_mag;
-	TimeOut m_timeout;
 
   protected:
 	virtual void GetState(Vector<int16_t>& accel, Vector<int16_t>& mag) = 0;

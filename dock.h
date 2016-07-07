@@ -19,6 +19,8 @@ class Dock {
 	long m_fpsCounter;
 	long m_fps;
 
+	TimeOut m_updateTimer;
+
 	void handleBuffer(Stream* stream);
 	void parseBuffer();
 	int convertParams(char** params, int* intParams);
@@ -37,4 +39,4 @@ class Dock {
 	void Update(Stream* stream);
 };
 
-#endif  // ARDUINO_FLOTILLA_DUMMY_DOCK_H
+#endif
