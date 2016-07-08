@@ -8,5 +8,7 @@
 #include "moduleweather.h"
 #include "modulemotion.h"
 #include "modulemotor.h"
+#include "modulejoystick.h"
+#include "modulecolour.h"
 
 #endif
