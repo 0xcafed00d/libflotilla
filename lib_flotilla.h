@@ -12,5 +12,7 @@
 #include "modulecolour.h"
 #include "moduleslider.h"
 #include "moduledial.h"
+#include "modulematrix.h"
+#include "modulenumber.h"
 
 #endif
