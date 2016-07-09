@@ -10,5 +10,7 @@
 #include "modulemotor.h"
 #include "modulejoystick.h"
 #include "modulecolour.h"
+#include "moduleslider.h"
+#include "moduledial.h"
 
 #endif
