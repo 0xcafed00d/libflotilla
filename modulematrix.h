@@ -5,7 +5,7 @@
 
 class ModuleMatrix : public Module {
   protected:
-	virtual void SetMatrix(uint8_t* data) = 0;
+	virtual void SetMatrix(uint8_t* data, uint8_t brightness) = 0;
 
   public:
 	void Init(int chan);
