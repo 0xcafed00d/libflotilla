@@ -17,7 +17,7 @@ int Dock::convertParams(char** params, int* intParams) {
 	return pcount;
 }
 
-void Dock::handleSet(char** params, Stream* stream) {
+void Dock::handleSet(char** params, SerialStream* stream) {
 	int intParams[16];
 
 	int pcount = convertParams(params, intParams);
@@ -29,7 +29,7 @@ void Dock::handleSet(char** params, Stream* stream) {
 	}
 }
 
-void Dock::handleCommand(char** cmd, Stream* stream) {
+void Dock::handleCommand(char** cmd, SerialStream* stream) {
 	if (*cmd) {
 		switch (*cmd[0]) {
 			case 'v':
@@ -77,7 +77,7 @@ void readName(char* name, size_t index) {
 	}
 }
 
-void Dock::handleName(char** params, Stream* stream) {
+void Dock::handleName(char** params, SerialStream* stream) {
 	if (*params) {
 		if (*params[0] == 'u') {
 			writeName(params[1], 0);
@@ -107,7 +107,7 @@ void Dock::parseBuffer() {
 	*toks = NULL;
 }
 
-void Dock::handleVersion(Stream* stream) {
+void Dock::handleVersion(SerialStream* stream) {
 	char name[9];
 	stream->print("# Flotilla ready to set sail..\r\n");
 	stream->print("# Version: 1.12\r\n");
@@ -123,7 +123,7 @@ void Dock::handleVersion(Stream* stream) {
 	stream->print("\r\n");
 }
 
-void Dock::handleDebug(Stream* stream) {
+void Dock::handleDebug(SerialStream* stream) {
 	stream->print("# SRAM: 1337 bytes\r\n");
 	long us = 1000000 / m_fps;
 	stream->print("# Loop: ");
@@ -145,7 +145,7 @@ void Dock::handleDebug(Stream* stream) {
 	}
 }
 
-void Dock::handleEnquire(Stream* stream) {
+void Dock::handleEnquire(SerialStream* stream) {
 	for (size_t n = 0; n < NUM_MODULES; n++) {
 		if (m_channels[n] != NULL) {
 			m_channels[n]->OnEnquire(stream);
@@ -153,7 +153,7 @@ void Dock::handleEnquire(Stream* stream) {
 	}
 }
 
-void Dock::handleBuffer(Stream* stream) {
+void Dock::handleBuffer(SerialStream* stream) {
 	m_inputBuffer[m_bufferPos] = 0;
 	parseBuffer();
 	handleCommand(m_tokenPtrs, stream);
@@ -166,7 +166,7 @@ void Dock::AddModule(Module* mod) {
 	m_channels[chan - 1] = mod;
 }
 
-void Dock::ProcessInput(Stream* stream) {
+void Dock::ProcessInput(SerialStream* stream) {
 	m_fpsCounter++;
 	if (m_fpsTimer.hasTimedOut()) {
 		m_fps = m_fpsCounter;
@@ -191,7 +191,7 @@ void Dock::ProcessInput(Stream* stream) {
 	}
 }
 
-void Dock::Update(Stream* stream) {
+void Dock::Update(SerialStream* stream) {
 	if (m_updateTimer.hasTimedOut()) {
 		for (size_t n = 0; n < NUM_MODULES; n++) {
 			if (m_channels[n] != NULL && m_channels[n]->IsConnected()) {

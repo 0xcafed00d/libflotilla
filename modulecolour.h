@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULECOLOUR_H
 #define ARDUINO_FLOTILLA_MODULECOLOUR_H
 
-#include <Arduino.h>
 #include "module.h"
 
 class ModuleColour : public Module {
@@ -21,7 +20,7 @@ class ModuleColour : public Module {
 		return "colour";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

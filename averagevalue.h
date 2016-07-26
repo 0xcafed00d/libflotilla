@@ -1,8 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_AVERAGE_VALUE_H
 #define ARDUINO_FLOTILLA_AVERAGE_VALUE_H
 
-#include <Arduino.h>
-
 template <typename total_t, typename value_t>
 class AverageValue {
   private:

@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULESLIDER_H
 #define ARDUINO_FLOTILLA_MODULESLIDER_H
 
-#include <Arduino.h>
 #include "module.h"
 
 class ModuleSlider : public Module {
@@ -18,7 +17,7 @@ class ModuleSlider : public Module {
 		return "slider";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

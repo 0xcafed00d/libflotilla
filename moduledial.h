@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULEDIAL_H
 #define ARDUINO_FLOTILLA_MODULEDIAL_H
 
-#include <Arduino.h>
 #include "module.h"
 
 class ModuleDial : public Module {
@@ -18,7 +17,7 @@ class ModuleDial : public Module {
 		return "dial";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

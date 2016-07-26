@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULETOUCH_H
 #define ARDUINO_FLOTILLA_MODULETOUCH_H
 
-#include <Arduino.h>
 #include "module.h"
 
 class ModuleTouch : public Module {
@@ -18,7 +17,7 @@ class ModuleTouch : public Module {
 		return "touch";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULEWEATHER_H
 #define ARDUINO_FLOTILLA_MODULEWEATHER_H
 
-#include <Arduino.h>
 #include "module.h"
 
 class ModuleWeather : public Module {
@@ -19,7 +18,7 @@ class ModuleWeather : public Module {
 		return "weather";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

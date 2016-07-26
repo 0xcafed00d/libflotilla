@@ -7,7 +7,7 @@ void Module::SetChannel(int c) {
 	m_channel = c;
 }
 
-void Module::printUpdateHeader(Stream* stream) {
+void Module::printUpdateHeader(SerialStream* stream) {
 	stream->print("u ");
 	stream->print(Channel());
 	stream->print("/");
@@ -27,7 +27,7 @@ void Module::SetConnected(bool c) {
 	m_connected = c;
 }
 
-void Module::OnEnquire(Stream* stream) {
+void Module::OnEnquire(SerialStream* stream) {
 	stream->print("c ");
 	stream->print(Channel());
 	stream->print("/");
@@ -38,5 +38,5 @@ void Module::OnEnquire(Stream* stream) {
 void Module::Set(int* params, int paramc) {
 }
 
-void Module::Update(Stream* stream) {
+void Module::Update(SerialStream* stream) {
 }

@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULEJOYSTICK_H
 #define ARDUINO_FLOTILLA_MODULEJOYSTICK_H
 
-#include <Arduino.h>
 #include "module.h"
 
 class ModuleJoystick : public Module {
@@ -20,7 +19,7 @@ class ModuleJoystick : public Module {
 		return "joystick";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

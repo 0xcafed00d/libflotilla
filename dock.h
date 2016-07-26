@@ -1,9 +1,7 @@
 #ifndef ARDUINO_FLOTILLA_DOCK_H
 #define ARDUINO_FLOTILLA_DOCK_H
 
-#include "Arduino.h"
 #include "module.h"
-#include "timeout.h"
 
 class Dock {
   private:
@@ -21,22 +19,22 @@ class Dock {
 
 	TimeOut m_updateTimer;
 
-	void handleBuffer(Stream* stream);
+	void handleBuffer(SerialStream* stream);
 	void parseBuffer();
 	int convertParams(char** params, int* intParams);
 
-	void handleCommand(char** cmd, Stream* stream);
-	void handleVersion(Stream* stream);
-	void handleDebug(Stream* stream);
-	void handleEnquire(Stream* stream);
-	void handleSet(char** params, Stream* stream);
-	void handleName(char** params, Stream* stream);
+	void handleCommand(char** cmd, SerialStream* stream);
+	void handleVersion(SerialStream* stream);
+	void handleDebug(SerialStream* stream);
+	void handleEnquire(SerialStream* stream);
+	void handleSet(char** params, SerialStream* stream);
+	void handleName(char** params, SerialStream* stream);
 
   public:
 	Dock();
 	void AddModule(Module* mod);
-	void ProcessInput(Stream* stream);
-	void Update(Stream* stream);
+	void ProcessInput(SerialStream* stream);
+	void Update(SerialStream* stream);
 };
 
 #endif

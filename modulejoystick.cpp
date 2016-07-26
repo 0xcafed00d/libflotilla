@@ -7,7 +7,7 @@ void ModuleJoystick::Init(int chan) {
 	m_prevButton = false;
 }
 
-void ModuleJoystick::Update(Stream* stream) {
+void ModuleJoystick::Update(SerialStream* stream) {
 	int16_t x;
 	int16_t y;
 	bool button;

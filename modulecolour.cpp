@@ -8,7 +8,7 @@ void ModuleColour::Init(int chan) {
 	m_prevC = 0;
 }
 
-void ModuleColour::Update(Stream* stream) {
+void ModuleColour::Update(SerialStream* stream) {
 	int16_t r, g, b, c;
 	GetState(r, g, b, c);
 

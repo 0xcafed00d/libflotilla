@@ -1,7 +1,7 @@
 #ifndef ARDUINO_FLOTILLA_MODULE_H
 #define ARDUINO_FLOTILLA_MODULE_H
 
-#include "Arduino.h"
+#include "externalinterfaces.h"
 
 class Module {
   private:
@@ -11,16 +11,16 @@ class Module {
   protected:
 	Module();
 	void SetChannel(int c);
-	void printUpdateHeader(Stream* stream);
+	void printUpdateHeader(SerialStream* stream);
 
   public:
 	int Channel();
 	bool IsConnected();
 	void SetConnected(bool c);
 	virtual const char* Name() = 0;
-	void OnEnquire(Stream* stream);
+	void OnEnquire(SerialStream* stream);
 	virtual void Set(int* params, int paramc);
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

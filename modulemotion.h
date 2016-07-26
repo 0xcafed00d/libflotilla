@@ -1,7 +1,6 @@
 #ifndef ARDUINO_FLOTILLA_MODULEMOTION_H
 #define ARDUINO_FLOTILLA_MODULEMOTION_H
 
-#include <Arduino.h>
 #include "module.h"
 
 template <typename value_t>
@@ -32,7 +31,7 @@ class ModuleMotion : public Module {
 		return "motion";
 	}
 
-	virtual void Update(Stream* stream);
+	virtual void Update(SerialStream* stream);
 };
 
 #endif

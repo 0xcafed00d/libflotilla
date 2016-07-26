@@ -5,7 +5,7 @@ void ModuleTouch::Init(int chan) {
 	m_prevState = 255;  // initially set to impossible state so we get at least 1 update at start
 }
 
-void ModuleTouch::Update(Stream* stream) {
+void ModuleTouch::Update(SerialStream* stream) {
 	uint8_t newState = GetState();
 
 	if (newState != m_prevState) {

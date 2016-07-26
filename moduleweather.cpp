@@ -6,7 +6,7 @@ void ModuleWeather::Init(int chan) {
 	m_prevTemp = 0;  
 }
 
-void ModuleWeather::Update(Stream* stream) {
+void ModuleWeather::Update(SerialStream* stream) {
 	uint16_t temp, pressure;
 	GetState(temp, pressure);
 

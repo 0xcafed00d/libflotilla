@@ -6,7 +6,7 @@ void ModuleMotion::Init(int chan) {
 	m_prevMag = Vector<int16_t>{};
 }
 
-void printVector(Stream* stream, const Vector<int16_t>& v) {
+void printVector(SerialStream* stream, const Vector<int16_t>& v) {
 	stream->print(v.x);
 	stream->print(", ");
 	stream->print(v.y);
@@ -14,7 +14,7 @@ void printVector(Stream* stream, const Vector<int16_t>& v) {
 	stream->print(v.z);
 }
 
-void ModuleMotion::Update(Stream* stream) {
+void ModuleMotion::Update(SerialStream* stream) {
 	Vector<int16_t> accel, mag;
 	GetState(accel, mag);
 

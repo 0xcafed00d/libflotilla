@@ -7,7 +7,7 @@ void ModuleLight::Init(int chan) {
 	m_prevLux = 0;
 }
 
-void ModuleLight::Update(Stream* stream) {
+void ModuleLight::Update(SerialStream* stream) {
 	uint16_t vis, ir, lux;
 	GetState(vis, ir, lux);
 
