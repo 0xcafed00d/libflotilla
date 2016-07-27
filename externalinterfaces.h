@@ -13,8 +13,8 @@ struct SerialStream {
 };
 
 struct PersistantStore {
-	virtual void writeBlock(int offset, void* data, size_t len) = 0;
-	virtual void readBlock(int offset, void* data, size_t len) = 0;
+	virtual void writeBlock(void* data, int offset, size_t len) = 0;
+	virtual void readBlock(void* data, int offset, size_t len) = 0;
 };
 
 struct TimeOut {

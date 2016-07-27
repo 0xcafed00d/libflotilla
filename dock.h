@@ -7,9 +7,11 @@ class Dock {
   private:
 	static const size_t BUFFER_SZ = 128;
 	static const size_t NUM_MODULES = 8;
+	TimerUtil* m_timerutil;
+	PersistantStore* m_store;
 
 	char m_inputBuffer[BUFFER_SZ + 1];
-	size_t m_bufferPos = 0;
+	size_t m_bufferPos;
 	char* m_tokenPtrs[32];
 	Module* m_channels[NUM_MODULES];
 
@@ -31,7 +33,7 @@ class Dock {
 	void handleName(char** params, SerialStream* stream);
 
   public:
-	Dock();
+	Dock(TimerUtil* timerutil, PersistantStore* store);
 	void AddModule(Module* mod);
 	void ProcessInput(SerialStream* stream);
 	void Update(SerialStream* stream);

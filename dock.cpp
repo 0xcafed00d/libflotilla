@@ -5,7 +5,14 @@ bool isDelim(char c) {
 	return c == ',' || c == ' ';
 }
 
-Dock::Dock() : m_bufferPos(0), m_fpsTimer(1000), m_fpsCounter(0), m_fps(0), m_updateTimer(50) {
+Dock::Dock(TimerUtil* timerutil, PersistantStore* store)
+    : m_timeutil(timerutil),
+      m_store(store),
+      m_bufferPos(0),
+      m_fpsTimer(timerutil->make(1000)),
+      m_fpsCounter(0),
+      m_fps(0),
+      m_updateTimer(timerutil->make(50)) {
 	memset(m_channels, 0, sizeof(m_channels));
 }
 
@@ -168,10 +175,10 @@ void Dock::AddModule(Module* mod) {
 
 void Dock::ProcessInput(SerialStream* stream) {
 	m_fpsCounter++;
-	if (m_fpsTimer.hasTimedOut()) {
+	if (m_timerutil->hasTimedOut(m_fpsTimer)) {
 		m_fps = m_fpsCounter;
 		m_fpsCounter = 0;
-		m_fpsTimer = TimeOut(1000);
+		m_fpsTimer = m_timerutil->make(1000);
 	}
 
 	while (true) {
@@ -192,12 +199,12 @@ void Dock::ProcessInput(SerialStream* stream) {
 }
 
 void Dock::Update(SerialStream* stream) {
-	if (m_updateTimer.hasTimedOut()) {
+	if (m_timerutil->hasTimedOut(m_updateTimer)) {
 		for (size_t n = 0; n < NUM_MODULES; n++) {
 			if (m_channels[n] != NULL && m_channels[n]->IsConnected()) {
 				m_channels[n]->Update(stream);
 			}
 		}
-		m_updateTimer = TimeOut(50);
+		m_updateTimer = m_timerutil->make(50);
 	}
 }
