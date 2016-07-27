@@ -14,13 +14,13 @@ uint8_t checksum(type* data) {
 
 template <typename type>
 int writeStructEEPROM(const type& s, int addr, PersistantStore* store) {
-	store->writeBlock(&s, addr, sizeof(type));
+	store->writeBlock((void*)&s, addr, sizeof(type));
 	return sizeof(type);
 }
 
 template <typename type>
 int readStructEEPROM(type& s, int addr, PersistantStore* store) {
-	store->readBlock(&s, addr, sizeof(type));
+	store->readBlock((void*)&s, addr, sizeof(type));
 	return sizeof(type);
 }
 

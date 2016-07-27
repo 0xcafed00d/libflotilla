@@ -6,8 +6,8 @@
 
 struct SerialStream {
 	virtual bool available() = 0;
-	virtual int readChar() = 0;
-	virtual void writeChar(int c) = 0;
+	virtual int read() = 0;
+	virtual void write(int c) = 0;
 	virtual void print(int v) = 0;
 	virtual void print(const char* s) = 0;
 };

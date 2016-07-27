@@ -1,12 +1,15 @@
 #include "dock.h"
 #include "eepromutils.h"
 
+#include <string.h>
+#include <stdlib.h>
+
 bool isDelim(char c) {
 	return c == ',' || c == ' ';
 }
 
 Dock::Dock(TimerUtil* timerutil, PersistantStore* store)
-    : m_timeutil(timerutil),
+    : m_timerutil(timerutil),
       m_store(store),
       m_bufferPos(0),
       m_fpsTimer(timerutil->make(1000)),
@@ -63,17 +66,17 @@ struct flotillaName {
 	uint8_t check;
 };
 
-void writeName(const char* name, size_t index) {
+void writeName(const char* name, size_t index, PersistantStore* store) {
 	flotillaName fname;
 	memset(&fname, 0, sizeof(fname));
 	strncpy(fname.name, name, 8);
 	fname.check = checksum(&fname);
-	writeStructEEPROM(fname, sizeof(fname) * index);
+	writeStructEEPROM(fname, sizeof(fname) * index, store);
 }
 
-void readName(char* name, size_t index) {
+void readName(char* name, size_t index, PersistantStore* store) {
 	flotillaName fname;
-	readStructEEPROM(fname, sizeof(fname) * index);
+	readStructEEPROM(fname, sizeof(fname) * index, store);
 	uint8_t chk = fname.check;
 	fname.check = 0;
 
@@ -87,10 +90,10 @@ void readName(char* name, size_t index) {
 void Dock::handleName(char** params, SerialStream* stream) {
 	if (*params) {
 		if (*params[0] == 'u') {
-			writeName(params[1], 0);
+			writeName(params[1], 0, m_store);
 		}
 		if (*params[0] == 'd') {
-			writeName(params[1], 1);
+			writeName(params[1], 1, m_store);
 		}
 	}
 }
@@ -120,11 +123,11 @@ void Dock::handleVersion(SerialStream* stream) {
 	stream->print("# Version: 1.12\r\n");
 	stream->print("# Serial: 0111111111111111111111\r\n");
 
-	readName(name, 0);
+	readName(name, 0, m_store);
 	stream->print("# User: ");
 	stream->print(name);
 
-	readName(name, 1);
+	readName(name, 1, m_store);
 	stream->print("\r\n# Dock: ");
 	stream->print(name);
 	stream->print("\r\n");
