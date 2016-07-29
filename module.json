@@ -1,0 +1,9 @@
+{
+  "name": "libflotilla",
+  "version": "0.0.0",
+  "description": "flotilla dock & module library",
+  "keywords": [],
+  "author": "Lee Witek",
+  "license": "MIT",
+  "dependencies": {}
+}
