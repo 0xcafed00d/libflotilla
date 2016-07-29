@@ -29,8 +29,8 @@ class Dock {
 	void handleVersion(SerialStream* stream);
 	void handleDebug(SerialStream* stream);
 	void handleEnquire(SerialStream* stream);
-	void handleSet(char** params, SerialStream* stream);
-	void handleName(char** params, SerialStream* stream);
+	void handleSet(char** params);
+	void handleName(char** params);
 
   public:
 	Dock(TimerUtil* timerutil, PersistantStore* store);

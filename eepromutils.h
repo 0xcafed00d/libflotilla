@@ -6,7 +6,7 @@
 template <typename type>
 uint8_t checksum(type* data) {
 	uint8_t chk = 0;
-	for (int n = 0; n < sizeof(type); n++) {
+	for (size_t n = 0; n < sizeof(type); n++) {
 		chk += ((uint8_t*)data)[n];
 	}
 	return ~chk + 1;

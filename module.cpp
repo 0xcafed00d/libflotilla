@@ -35,8 +35,8 @@ void Module::OnEnquire(SerialStream* stream) {
 	stream->print("\r\n");
 }
 
-void Module::Set(int* params, int paramc) {
+void Module::Set(int*, int) {
 }
 
-void Module::Update(SerialStream* stream) {
+void Module::Update(SerialStream*) {
 }

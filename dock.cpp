@@ -27,7 +27,7 @@ int Dock::convertParams(char** params, int* intParams) {
 	return pcount;
 }
 
-void Dock::handleSet(char** params, SerialStream* stream) {
+void Dock::handleSet(char** params) {
 	int intParams[16];
 
 	int pcount = convertParams(params, intParams);
@@ -52,10 +52,10 @@ void Dock::handleCommand(char** cmd, SerialStream* stream) {
 				handleEnquire(stream);
 				break;
 			case 's':
-				handleSet(cmd + 1, stream);
+				handleSet(cmd + 1);
 				break;
 			case 'n':
-				handleName(cmd + 1, stream);
+				handleName(cmd + 1);
 				break;
 		}
 	}
@@ -87,7 +87,7 @@ void readName(char* name, size_t index, PersistantStore* store) {
 	}
 }
 
-void Dock::handleName(char** params, SerialStream* stream) {
+void Dock::handleName(char** params) {
 	if (*params) {
 		if (*params[0] == 'u') {
 			writeName(params[1], 0, m_store);
