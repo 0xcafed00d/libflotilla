@@ -12,6 +12,10 @@ class Module {
 	Module();
 	void SetChannel(int c);
 	void printUpdateHeader(SerialStream* stream);
+	void printList(SerialStream* stream, int a);
+	void printList(SerialStream* stream, int a, int b);
+	void printList(SerialStream* stream, int a, int b, int c);
+	void printList(SerialStream* stream, int a, int b, int c, int d);
 
   public:
 	int Channel();

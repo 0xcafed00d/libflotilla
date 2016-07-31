@@ -15,6 +15,29 @@ void Module::printUpdateHeader(SerialStream* stream) {
 	stream->print(" ");
 }
 
+void Module::printList(SerialStream* stream, int a) {
+	stream->print(a);
+	stream->print("\r\n");
+}
+
+void Module::printList(SerialStream* stream, int a, int b) {
+	stream->print(a);
+	stream->print(',');
+	printList(stream, b);
+}
+
+void Module::printList(SerialStream* stream, int a, int b, int c) {
+	stream->print(a);
+	stream->print(',');
+	printList(stream, b, c);
+}
+
+void Module::printList(SerialStream* stream, int a, int b, int c, int d) {
+	stream->print(a);
+	stream->print(',');
+	printList(stream, b, c, d);
+}
+
 int Module::Channel() {
 	return m_channel;
 }
