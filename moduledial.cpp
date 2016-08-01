@@ -10,8 +10,7 @@ void ModuleDial::Update(SerialStream* stream) {
 
 	if (newState != m_prevState) {
 		printUpdateHeader(stream);
-		stream->print(newState);
-		stream->print("\r\n");
+		printList(stream, newState);
 		m_prevState = newState;
 	}
 }

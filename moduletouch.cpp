@@ -11,9 +11,7 @@ void ModuleTouch::Update(SerialStream* stream) {
 	if (newState != m_prevState) {
 		m_prevState = newState;
 		printUpdateHeader(stream);
-		stream->print((m_prevState & 1) ? "1," : "0,");
-		stream->print((m_prevState & 2) ? "1," : "0,");
-		stream->print((m_prevState & 4) ? "1," : "0,");
-		stream->print((m_prevState & 8) ? "1\r\n" : "0\r\n");
+		printList(stream, m_prevState & 1, (m_prevState & 2) >> 1, (m_prevState & 4) >> 2,
+		          (m_prevState & 8) >> 3);
 	}
 }

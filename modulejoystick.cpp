@@ -16,11 +16,7 @@ void ModuleJoystick::Update(SerialStream* stream) {
 
 	if (x != m_prevX || y != m_prevY || button != m_prevButton) {
 		printUpdateHeader(stream);
-		stream->print(button ? "1," : "0,");
-		stream->print(x);
-		stream->print(',');
-		stream->print(y);
-		stream->print("\r\n");
+		printList(stream, button ? 1 : 0, x, y);
 		m_prevX = x;
 		m_prevY = y;
 		m_prevButton = button;

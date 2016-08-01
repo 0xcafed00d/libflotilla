@@ -3,7 +3,7 @@
 void ModuleWeather::Init(int chan) {
 	SetChannel(chan);
 	m_prevPressure = 0;
-	m_prevTemp = 0;  
+	m_prevTemp = 0;
 }
 
 void ModuleWeather::Update(SerialStream* stream) {
@@ -11,15 +11,8 @@ void ModuleWeather::Update(SerialStream* stream) {
 	GetState(temp, pressure);
 
 	if (temp != m_prevTemp || pressure != m_prevPressure) {
-		stream->print("u ");
-		stream->print(Channel());
-		stream->print("/");
-		stream->print(Name());
-		stream->print(" ");
-		stream->print(temp);
-		stream->print(", ");
-		stream->print(pressure);
-		stream->print("\r\n");
+		printUpdateHeader(stream);
+		printList(stream, temp, pressure);
 
 		m_prevTemp = temp;
 		m_prevPressure = pressure;

@@ -14,14 +14,7 @@ void ModuleColour::Update(SerialStream* stream) {
 
 	if (r != m_prevR || g != m_prevG || b != m_prevG || c != m_prevC) {
 		printUpdateHeader(stream);
-		stream->print(r);
-		stream->print(',');
-		stream->print(g);
-		stream->print(',');
-		stream->print(b);
-		stream->print(',');
-		stream->print(c);
-		stream->print("\r\n");
+		printList(stream, r, g, b, c);
 
 		m_prevR = r;
 		m_prevG = g;

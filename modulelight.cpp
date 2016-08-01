@@ -13,12 +13,7 @@ void ModuleLight::Update(SerialStream* stream) {
 
 	if (vis != m_prevVisible || ir != m_prevIR || lux != m_prevLux) {
 		printUpdateHeader(stream);
-		stream->print(vis);
-		stream->print(", ");
-		stream->print(ir);
-		stream->print(", ");
-		stream->print(lux);
-		stream->print("\r\n");
+		printList(stream, vis, ir, lux);
 
 		m_prevVisible = vis;
 		m_prevIR = ir;
