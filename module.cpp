@@ -22,19 +22,19 @@ void Module::printList(SerialStream* stream, int a) {
 
 void Module::printList(SerialStream* stream, int a, int b) {
 	stream->print(a);
-	stream->print(',');
+	stream->print(",");
 	printList(stream, b);
 }
 
 void Module::printList(SerialStream* stream, int a, int b, int c) {
 	stream->print(a);
-	stream->print(',');
+	stream->print(",");
 	printList(stream, b, c);
 }
 
 void Module::printList(SerialStream* stream, int a, int b, int c, int d) {
 	stream->print(a);
-	stream->print(',');
+	stream->print(",");
 	printList(stream, b, c, d);
 }
 
