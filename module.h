@@ -16,6 +16,8 @@ class Module {
 	void printList(SerialStream* stream, int a, int b);
 	void printList(SerialStream* stream, int a, int b, int c);
 	void printList(SerialStream* stream, int a, int b, int c, int d);
+	virtual void OnInit() {
+	}
 
   public:
 	int Channel();

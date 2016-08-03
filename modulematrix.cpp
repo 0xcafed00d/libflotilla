@@ -2,6 +2,7 @@
 
 void ModuleMatrix::Init(int chan) {
 	SetChannel(chan);
+	OnInit();
 }
 
 void ModuleMatrix::Set(int* params, int paramc) {
