@@ -2,7 +2,7 @@
 
 void ModuleLight::Init(int chan) {
 	SetChannel(chan);
-	m_prevVisible = 0;
+	m_prevVisible = -1;
 	m_prevIR = 0;
 	m_prevLux = 0;
 }
