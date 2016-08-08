@@ -10,6 +10,8 @@ class Dock {
 	TimerUtil* m_timerutil;
 	PersistantStore* m_store;
 
+	int m_currentChannel;
+
 	char m_inputBuffer[BUFFER_SZ + 1];
 	size_t m_bufferPos;
 	char* m_tokenPtrs[32];

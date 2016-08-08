@@ -11,6 +11,7 @@ bool isDelim(char c) {
 Dock::Dock(TimerUtil* timerutil, PersistantStore* store)
     : m_timerutil(timerutil),
       m_store(store),
+      m_currentChannel(1),
       m_bufferPos(0),
       m_fpsTimer(timerutil->make(1000)),
       m_fpsCounter(0),
@@ -171,9 +172,8 @@ void Dock::handleBuffer(SerialStream* stream) {
 }
 
 void Dock::AddModule(Module* mod) {
-	int chan = mod->Channel();
-
-	m_channels[chan - 1] = mod;
+	mod->Init(m_currentChannel++);
+	m_channels[mod->Channel() - 1] = mod;
 }
 
 void Dock::ProcessInput(SerialStream* stream) {

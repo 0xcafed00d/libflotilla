@@ -23,6 +23,7 @@ class Module {
 	int Channel();
 	bool IsConnected();
 	void SetConnected(bool c);
+	virtual void Init(int channel) = 0;
 	virtual const char* Name() = 0;
 	void OnEnquire(SerialStream* stream);
 	virtual void Set(int* params, int paramc);
